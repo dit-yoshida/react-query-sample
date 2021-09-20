@@ -1,21 +1,27 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./index.css";
-import App from "./pages/app";
 import reportWebVitals from "./reportWebVitals";
+import App from "./pages/app";
+import Todo from "./pages/todo";
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+const queryClient = new QueryClient();
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Router>
-      <Switch>
-        <Route path="/">
+  <QueryClientProvider client={queryClient}>
+    <React.StrictMode>
+      <Router>
+        <Route exact path="/">
           <App />
         </Route>
-      </Switch>
-    </Router>
-  </React.StrictMode>,
+        <Route exact path="/todo">
+          <Todo />
+        </Route>
+      </Router>
+    </React.StrictMode>
+  </QueryClientProvider>,
   document.getElementById("root")
 );
 
